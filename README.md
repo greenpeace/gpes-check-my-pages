@@ -19,15 +19,16 @@ The urls file, by default `urls.csv` must have all the urls you want to check. Y
 To check all urls in `urls.csv` with all the checks use the command:
 
 ```
-./check-my-pages -urls=urls.csv -http -analytics -canonical
+./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects
 ```
 
 This repository includes a few testing urls in the file `urls.csv`. Please replace them by your own.
 
 It will create a couple of files, one per check the script is doing:
-* `httpResponses.csv` - Stores the http response codes for the URL. 200 means everything is OK.
-* `analytics.csv` - Reports unusual google analytics codes
-* `canonicals.csv` - Reports the canonical url for every url
+* `httpResponses.csv` - Stores the **http response** codes for the URL. 200 means everything is OK.
+* `analytics.csv` - Reports **google analytics** tracking ID
+* `canonicals.csv` - Reports the **canonical url** for every url
+* `redirects.csv` - Reports the requested URL and the final URL. This will be useful to test the **redirects** in the main site.
 
 ## Remove the report files
 
