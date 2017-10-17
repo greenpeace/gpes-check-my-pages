@@ -8,7 +8,7 @@ This script complements other scripts and command line tools like ack, grep, rpl
 
 ## Download and install
 
-To install the script, clone the repository, compile it and move the executable to your working folder.
+To install the script, clone the [repository](https://github.com/greenpeace/check-my-pages), compile it and move the executable to your working folder.
 
 ## File with list of urls
 
@@ -19,7 +19,7 @@ The urls file, by default `urls.csv` must have all the urls you want to check. Y
 To check all urls in `urls.csv` with all the checks use the command:
 
 ```
-./scrap -urls=urls.csv -http -analytics -canonical
+./check-my-pages -urls=urls.csv -http -analytics -canonical
 ```
 
 This repository includes a few testing urls in the file `urls.csv`. Please replace them by your own.
@@ -34,5 +34,5 @@ It will create a couple of files, one per check the script is doing:
 To remove the files created by **check-my-pages**:
 
 ```
-./scrap -clear 
+./check-my-pages -clear 
 ```
