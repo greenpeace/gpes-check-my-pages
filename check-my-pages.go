@@ -107,6 +107,7 @@ func main() {
 		os.Remove("httpResponses.csv")
 		os.Remove("analytics.csv")
 		os.Remove("canonicals.csv")
+		os.Remove("redirects.csv")
 	}
 
 	// Open URLs file
