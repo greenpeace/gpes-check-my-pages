@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 	"os"
 	"time"
 
@@ -13,6 +14,7 @@ func main() {
 
 	urlsFileName := flag.String("urls", "urls.csv", "Name of the csv file with the urs in the first column")
 	isHTTP := flag.Bool("http", false, "Http response codes")
+	isRedirects := flag.Bool("redirects", false, "Redirects response codes")
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
 	isClear := flag.Bool("clear", false, "Remove files created by this script")
@@ -74,6 +76,29 @@ func main() {
 			if _, err := canonical.WriteString(lineCanonical); err != nil {
 				panic(err)
 			}
+		})
+	}
+
+	if *isRedirects == true {
+
+		redirects, redirectsErr := os.OpenFile("redirects.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if redirectsErr != nil {
+			panic(redirects)
+		}
+		defer redirects.Close()
+
+		c.OnRequest(func(r *colly.Request) {
+			response, error := http.Get(r.URL.String())
+			if error != nil {
+				fmt.Printf("=> %v\n", error.Error())
+			} else {
+				finalURL := response.Request.URL.String()
+				lineCanonical := fmt.Sprintf("%s,%s\n", r.URL.String(), finalURL)
+				if _, err := redirects.WriteString(lineCanonical); err != nil {
+					panic(err)
+				}
+			}
+
 		})
 	}
 
