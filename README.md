@@ -30,6 +30,10 @@ It will create a couple of files, one per check the script is doing:
 * `canonicals.csv` - Reports the **canonical url** for every url
 * `redirects.csv` - Reports the requested URL and the final URL. This will be useful to test the **redirects** in the main site.
 
+## Optional command line configurations
+
+`-miliseconds=100` - Sets a delay of 100 miliseconds between requests.
+
 ## Remove the report files
 
 To remove the files created by **check-my-pages**:

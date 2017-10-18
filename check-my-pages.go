@@ -17,6 +17,7 @@ func main() {
 	isRedirects := flag.Bool("redirects", false, "Redirects response codes")
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
+	waitMiliseconds := flag.Int("miliseconds", 100, "Miliseconds between requests")
 	isClear := flag.Bool("clear", false, "Remove files created by this script")
 	flag.Parse()
 
@@ -113,7 +114,7 @@ func main() {
 	// Open URLs file
 	for _, v := range allUrls {
 		c.Visit(v)
-		time.Sleep(time.Millisecond * 100)
+		time.Sleep(time.Millisecond * time.Duration(*waitMiliseconds))
 	}
 
 }
