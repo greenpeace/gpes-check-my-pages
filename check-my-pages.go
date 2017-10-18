@@ -19,6 +19,7 @@ func main() {
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
 	isLinkpattern := flag.Bool("linkpattern", false, "Link Pattern")
+	pattern := flag.String("pattern", `https?://(\w|-)+.greenpeace.org/espana/.+`, "Regular expression to detect in the links")
 	waitMiliseconds := flag.Int("miliseconds", 100, "Miliseconds between requests")
 	isClear := flag.Bool("clear", false, "Remove files created by this script")
 	flag.Parse()
@@ -27,7 +28,7 @@ func main() {
 
 	allUrls := csvFirstColumnToSlice(allUrlsCsv)
 
-	linkRegex, _ := regexp.Compile(`https?://(\w|-)+.greenpeace.org/espana/.+`)
+	linkRegex, _ := regexp.Compile(*pattern)
 
 	c := colly.NewCollector()
 	// c.AllowedDomains = []string{"localhost", "greenpeace.es", "archivo.greenpeace.es"}
