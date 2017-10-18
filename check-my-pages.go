@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"regexp"
 	"time"
 
 	"github.com/asciimoo/colly"
@@ -17,6 +18,7 @@ func main() {
 	isRedirects := flag.Bool("redirects", false, "Redirects response codes")
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
+	isLinkpattern := flag.Bool("linkpattern", false, "Link Pattern")
 	waitMiliseconds := flag.Int("miliseconds", 100, "Miliseconds between requests")
 	isClear := flag.Bool("clear", false, "Remove files created by this script")
 	flag.Parse()
@@ -24,6 +26,8 @@ func main() {
 	allUrlsCsv := readCsvFile(*urlsFileName)
 
 	allUrls := csvFirstColumnToSlice(allUrlsCsv)
+
+	linkRegex, _ := regexp.Compile(`https?://(\w|-)+.greenpeace.org/espana/.+`)
 
 	c := colly.NewCollector()
 	// c.AllowedDomains = []string{"localhost", "greenpeace.es", "archivo.greenpeace.es"}
@@ -77,6 +81,26 @@ func main() {
 			if _, err := canonical.WriteString(lineCanonical); err != nil {
 				panic(err)
 			}
+		})
+	}
+
+	if *isLinkpattern == true {
+
+		linkpattern, linkpatternErr := os.OpenFile("linkpattern.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if linkpatternErr != nil {
+			panic(linkpatternErr)
+		}
+		defer linkpattern.Close()
+
+		c.OnHTML("a", func(e *colly.HTMLElement) {
+			link := e.Attr("href")
+			if linkRegex.MatchString(link) {
+				lineLinkpattern := fmt.Sprintf("%s,%s\n", e.Request.URL.String(), link)
+				if _, err := linkpattern.WriteString(lineLinkpattern); err != nil {
+					panic(err)
+				}
+			}
+
 		})
 	}
 
