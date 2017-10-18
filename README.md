@@ -19,7 +19,7 @@ The urls file, by default `urls.csv` must have all the urls you want to check. Y
 To check all urls in `urls.csv` with all the checks use the command:
 
 ```
-./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects -linkpattern -pattern='https?://(\w|-)+.greenpeace.org/espana/.+'
+./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects -linkpattern
 ```
 
 This repository includes a few testing urls in the file `urls.csv`. Please replace them by your own.
@@ -34,6 +34,8 @@ It will create a couple of files, one per check the script is doing:
 ## Optional command line configurations
 
 `-miliseconds=100` - Sets a delay of 100 miliseconds between requests.
+
+`-pattern='https?://(\w|-)+.greenpeace.org/espana/.+'` - Changes the search link pattern to the regular expression.
 
 ## Remove the report files
 
