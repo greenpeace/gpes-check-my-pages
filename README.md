@@ -19,7 +19,7 @@ The urls file, by default `urls.csv` must have all the urls you want to check. Y
 To check all urls in `urls.csv` with all the checks use the command:
 
 ```
-./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects
+./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects -linkpattern -pattern='https?://(\w|-)+.greenpeace.org/espana/.+'
 ```
 
 This repository includes a few testing urls in the file `urls.csv`. Please replace them by your own.
@@ -29,6 +29,7 @@ It will create a couple of files, one per check the script is doing:
 * `analytics.csv` - Reports **google analytics** tracking ID
 * `canonicals.csv` - Reports the **canonical url** for every url
 * `redirects.csv` - Reports the requested URL and the final URL. This will be useful to test the **redirects** in the main site.
+* `linkpattern.csv` - Reports on links that include a regular expression pattern. Useful to track **links** to specific **dead sites**. The default pattern can be overwritten by the -pattern option.
 
 ## Optional command line configurations
 
