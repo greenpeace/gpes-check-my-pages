@@ -133,6 +133,7 @@ func main() {
 		os.Remove("analytics.csv")
 		os.Remove("canonicals.csv")
 		os.Remove("redirects.csv")
+		os.Remove("linkpattern.csv")
 		os.Exit(0)
 	}
 
