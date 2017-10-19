@@ -19,6 +19,7 @@ func main() {
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
 	isLinkpattern := flag.Bool("linkpattern", false, "Link Pattern")
+	isCSSJsPattern := flag.Bool("cssjspattern", false, "CSS and JS Pattern")
 	pattern := flag.String("pattern", `https?://(\w|-)+.greenpeace.org/espana/.+`, "Regular expression to detect in the links")
 	waitMiliseconds := flag.Int("miliseconds", 100, "Miliseconds between requests")
 	isClear := flag.Bool("clear", false, "Remove files created by this script")
@@ -98,6 +99,37 @@ func main() {
 			if linkRegex.MatchString(link) {
 				lineLinkpattern := fmt.Sprintf("%s,%s\n", e.Request.URL.String(), link)
 				if _, err := linkpattern.WriteString(lineLinkpattern); err != nil {
+					panic(err)
+				}
+			}
+
+		})
+	}
+
+	if *isCSSJsPattern == true {
+
+		cssJsPattern, cssJsPatternErr := os.OpenFile("cssjspattern.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if cssJsPatternErr != nil {
+			panic(cssJsPatternErr)
+		}
+		defer cssJsPattern.Close()
+
+		c.OnHTML("link[rel=stylesheet]", func(e *colly.HTMLElement) {
+			link := e.Attr("href")
+			if linkRegex.MatchString(link) {
+				lineCSSJsPattern := fmt.Sprintf("%s,css,%s\n", e.Request.URL.String(), link)
+				if _, err := cssJsPattern.WriteString(lineCSSJsPattern); err != nil {
+					panic(err)
+				}
+			}
+
+		})
+
+		c.OnHTML("script", func(e *colly.HTMLElement) {
+			src := e.Attr("src")
+			if linkRegex.MatchString(src) {
+				lineCSSJsPattern := fmt.Sprintf("%s,js,%s\n", e.Request.URL.String(), src)
+				if _, err := cssJsPattern.WriteString(lineCSSJsPattern); err != nil {
 					panic(err)
 				}
 			}
