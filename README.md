@@ -8,7 +8,15 @@ This script complements other scripts and command line tools like ack, grep, rpl
 
 ## Download and install
 
-To install the script, clone the [repository](https://github.com/greenpeace/check-my-pages), compile it and move the executable to your working folder.
+### Install from source
+
+If you have the Go compiler installed you can download and install go with:
+
+```
+go get github.com/greenpeace/check-my-pages
+
+go install github.com/greenpeace/check-my-pages
+```
 
 ## File with list of urls
 
