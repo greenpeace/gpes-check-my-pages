@@ -2,7 +2,7 @@
 
 **check-my-pages** is a scrapping script to test the Spanish web archive (with more than 10,000 pages). It checks each url in a list and creates report files about what was tested. Each file reports about a specific issue and includes the scanned url together with the result.
 
-Please note that the script was written to check for problems detected when manually inspecting a small sample (about 1%) of the Spanish website. This script was not built to be used as-it-is in other websites, you are supposed to modify it.
+Please note that the script was written to check for problems detected when manually inspecting a small sample (about 1%) of the Spanish website. ~~This script was not built to be used as-it-is in other websites, you are supposed to modify it.~~
 
 This **command line** script complements other command line tools like ack, grep, rpl and others.
 
