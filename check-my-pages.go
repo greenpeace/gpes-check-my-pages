@@ -238,6 +238,7 @@ func main() {
 		os.Remove("redirects.csv")
 		os.Remove("linkpattern.csv")
 		os.Remove("cssjspattern.csv")
+		os.Remove("mediapattern.csv")
 		os.Exit(0)
 	}
 
