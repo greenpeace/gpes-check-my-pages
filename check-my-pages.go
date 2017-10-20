@@ -20,6 +20,7 @@ func main() {
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
 	isLinkpattern := flag.Bool("linkpattern", false, "Link Pattern")
 	isCSSJsPattern := flag.Bool("cssjspattern", false, "CSS and JS Pattern")
+	isMediaPattern := flag.Bool("mediapattern", false, "Image, object and iframe Pattern")
 	pattern := flag.String("pattern", `https?://(\w|-)+.greenpeace.org/espana/.+`, "Regular expression to detect in the links")
 	waitMiliseconds := flag.Int("miliseconds", 100, "Miliseconds between requests")
 	isClear := flag.Bool("clear", false, "Remove files created by this script")
@@ -135,6 +136,75 @@ func main() {
 			}
 
 		})
+	}
+
+	if *isMediaPattern == true {
+
+		mediaPattern, mediaPatternErr := os.OpenFile("mediapattern.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if mediaPatternErr != nil {
+			panic(mediaPatternErr)
+		}
+		defer mediaPattern.Close()
+
+		c.OnHTML("img, picture source", func(e *colly.HTMLElement) {
+			src := e.Attr("src")
+			srcset := e.Attr("srcset")
+			if src == "" && srcset != "" {
+				src = srcset
+			}
+			if linkRegex.MatchString(src) {
+				lineMediaPattern := fmt.Sprintf("%s,img,%s\n", e.Request.URL.String(), src)
+				if _, err := mediaPattern.WriteString(lineMediaPattern); err != nil {
+					panic(err)
+				}
+			}
+
+		})
+
+		c.OnHTML("video, video source", func(e *colly.HTMLElement) {
+			src := e.Attr("src")
+			if linkRegex.MatchString(src) {
+				lineMediaPattern := fmt.Sprintf("%s,video,%s\n", e.Request.URL.String(), src)
+				if _, err := mediaPattern.WriteString(lineMediaPattern); err != nil {
+					panic(err)
+				}
+			}
+
+		})
+
+		c.OnHTML("audio, audio source", func(e *colly.HTMLElement) {
+			src := e.Attr("src")
+			if linkRegex.MatchString(src) {
+				lineMediaPattern := fmt.Sprintf("%s,audio,%s\n", e.Request.URL.String(), src)
+				if _, err := mediaPattern.WriteString(lineMediaPattern); err != nil {
+					panic(err)
+				}
+			}
+
+		})
+
+		c.OnHTML("iframe", func(e *colly.HTMLElement) {
+			src := e.Attr("src")
+			if linkRegex.MatchString(src) {
+				lineMediaPattern := fmt.Sprintf("%s,iframe,%s\n", e.Request.URL.String(), src)
+				if _, err := mediaPattern.WriteString(lineMediaPattern); err != nil {
+					panic(err)
+				}
+			}
+
+		})
+
+		c.OnHTML("object", func(e *colly.HTMLElement) {
+			src := e.Attr("data")
+			if linkRegex.MatchString(src) {
+				lineMediaPattern := fmt.Sprintf("%s,object,%s\n", e.Request.URL.String(), src)
+				if _, err := mediaPattern.WriteString(lineMediaPattern); err != nil {
+					panic(err)
+				}
+			}
+
+		})
+
 	}
 
 	if *isRedirects == true {
