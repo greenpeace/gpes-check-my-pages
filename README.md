@@ -27,7 +27,7 @@ The urls file, by default `urls.csv` must have all the urls you want to check. Y
 To check all urls in `urls.csv` with all the checks use the command:
 
 ```
-./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects -linkpattern -cssjspattern
+./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects -linkpattern -cssjspattern -mediapattern
 ```
 
 This repository includes a few testing urls in the file `urls.csv`. Please replace them by your own.
@@ -38,7 +38,8 @@ It will create a couple of files, one per check the script is doing:
 * `canonicals.csv` - Reports the **canonical url** for every url
 * `redirects.csv` - Reports the requested URL and the final URL. This will be useful to test the **redirects** in the main site.
 * `linkpattern.csv` - Reports on links that include a regular expression pattern. Useful to track **links** to specific **dead sites**. The default pattern can be set by the `-pattern` option.
-* `cssjspattern.csv` - Reports css and js urls that include a regular expression pattern. To detect dead css and js urls in large sites. The pattern can also be ddefined with the option `-pattern` (described bellow)
+* `cssjspattern.csv` - Reports **css and js** urls that include a regular expression pattern. To detect dead css and js urls in large sites. The pattern can also be defined with the option `-pattern` (described bellow)
+* `mediapattern.csv` - Reports **media** links. Images, videos, audios, iframes and objects. Also use `-pattern` to define the urls pattern.
 
 ## Optional command line configurations
 
