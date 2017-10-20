@@ -4,9 +4,13 @@
 
 Please note that the script was written to check for problems detected when manually inspecting a small sample (about 1%) of the Spanish website. This script was not built to be used as-it-is in other websites, you are supposed to modify it.
 
-This script complements other scripts and command line tools like ack, grep, rpl and others.
+This **command line** script complements other command line tools like ack, grep, rpl and others.
 
 ## Download and install
+
+### Install the last version
+
+Go to the [releases page](https://github.com/greenpeace/check-my-pages/releases) and download the last version for your operating system: Windows, Mac and Linux 64bit.
 
 ### Install from source
 
