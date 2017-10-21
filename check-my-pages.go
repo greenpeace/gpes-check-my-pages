@@ -260,6 +260,7 @@ func main() {
 		os.Remove("linkpattern.csv")
 		os.Remove("cssjspattern.csv")
 		os.Remove("mediapattern.csv")
+		os.Remove("fileInfo.csv")
 		os.Exit(0)
 	}
 
