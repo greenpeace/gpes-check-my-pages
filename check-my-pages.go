@@ -18,6 +18,7 @@ func main() {
 	isRedirects := flag.Bool("redirects", false, "Redirects response codes")
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
+	isFileInfo := flag.Bool("fileinfo", false, "Specific calls for files")
 	isLinkpattern := flag.Bool("linkpattern", false, "Link Pattern")
 	isCSSJsPattern := flag.Bool("cssjspattern", false, "CSS and JS Pattern")
 	isMediaPattern := flag.Bool("mediapattern", false, "Image, object and iframe Pattern")
@@ -85,6 +86,26 @@ func main() {
 				panic(err)
 			}
 		})
+	}
+
+	if *isFileInfo == true {
+
+		fileInfofile, fileInfofileErr := os.OpenFile("fileInfo.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if fileInfofileErr != nil {
+			panic(fileInfofileErr)
+		}
+		defer fileInfofile.Close()
+
+		var lineFileInfo string
+		for _, v := range allUrls {
+			lineFileInfo = fileInfo(v)
+			if _, err := fileInfofile.WriteString(lineFileInfo); err != nil {
+				panic(err)
+			}
+			time.Sleep(time.Millisecond * time.Duration(*waitMiliseconds))
+		}
+
+		os.Exit(0)
 	}
 
 	if *isLinkpattern == true {
