@@ -63,6 +63,8 @@ You must use this check in a separate command like:
 
 because check-my-pages will stop after executing `-fileinfo`
 
+This check creates a file named `fileInfo.csv` with 4 fields: url, http status code, mime type and file size (adds -1 if the file size is unknown).
+
 ## Remove the report files
 
 To remove the files created by **check-my-pages**:
