@@ -51,6 +51,18 @@ It will create a couple of files, one per check the script is doing:
 
 `-pattern='https?://(\w|-)+.greenpeace.org/espana/.+'` - Changes the search link pattern to the regular expression.
 
+## Information about other urls
+
+If you want to obtain information about non-html files, like for example images, it's better to use `-fileinfo`.
+
+You must use this check in a separate command like:
+
+```
+./check-my-pages -urls=urls.csv -fileinfo -miliseconds=100
+```
+
+because check-my-pages will stop after executing `-fileinfo`
+
 ## Remove the report files
 
 To remove the files created by **check-my-pages**:
