@@ -13,6 +13,7 @@ import (
 
 func main() {
 
+	isHelp := flag.Bool("help", false, "Help")
 	urlsFileName := flag.String("urls", "urls.csv", "Name of the csv file with the urs in the first column")
 	isHTTP := flag.Bool("http", false, "Http response codes")
 	isRedirects := flag.Bool("redirects", false, "Redirects response codes")
@@ -35,6 +36,11 @@ func main() {
 
 	c := colly.NewCollector()
 	// c.AllowedDomains = []string{"localhost", "greenpeace.es", "archivo.greenpeace.es"}
+
+	if *isHelp == true {
+		help()
+		os.Exit(0)
+	}
 
 	if *isHTTP == true {
 
