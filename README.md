@@ -8,7 +8,7 @@ This **command line** script complements other command line tools like ack, grep
 
 ## Download and install
 
-### Install the last version
+### Install the lastest version
 
 Go to the [releases page](https://github.com/greenpeace/check-my-pages/releases) and download the last version for your operating system: Windows, Mac and Linux 64bit.
 
@@ -20,6 +20,20 @@ If you have the Go compiler installed you can download and install go with:
 go get github.com/greenpeace/check-my-pages
 
 go install github.com/greenpeace/check-my-pages
+```
+
+### Get help
+
+If you downloaded and installed the latest version from the [releases page](https://github.com/greenpeace/check-my-pages/releases) do:
+
+```
+ ./check-my-pages --help
+```
+
+If you installed from source do:
+
+```
+ check-my-pages --help
 ```
 
 ## File with list of urls
