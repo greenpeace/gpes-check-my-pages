@@ -54,7 +54,6 @@ It will create a couple of files, one per check the script is doing:
 * `httpResponses.csv` - Stores the **http response** codes for the URL. 200 means everything is OK.
 * `analytics.csv` - Reports **google analytics** tracking ID
 * `canonicals.csv` - Reports the **canonical url** for every url
-* `redirects.csv` - Reports the requested URL and the final URL. This will be useful to test the **redirects** in the main site.
 * `linkpattern.csv` - Reports on links that include a regular expression pattern. Useful to track **links** to specific **dead sites**. The default pattern can be set by the `-pattern` option.
 * `cssjspattern.csv` - Reports **css and js** urls that include a regular expression pattern. To detect dead css and js urls in large sites. The pattern can also be defined with the option `-pattern` (described bellow)
 * `mediapattern.csv` - Reports **media** links. Images, videos, audios, iframes and objects. Also use `-pattern` to define the urls pattern.

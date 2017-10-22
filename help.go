@@ -29,8 +29,6 @@ CHECKS:
 
 -canonical : Gets the canonical URL for the url.
 
--redirects : Gets info about redirects and final URLs.
-
 -linkpattern : Gets links that match the regular expression pattern.
 
 -cssjspattern : Gets CSS and JS URLs that match the regular expression pattern.
@@ -56,8 +54,6 @@ FILES WITH THE REPORTS:
 - analytics.csv : Reports google analytics tracking ID.
 
 - canonicals.csv : Reports the canonical url for every url
-
-- redirects.csv : Reports the requested URL and the final URL. This will be useful to test the redirects in the main site.
 
 - linkpattern.csv : Reports on links that include a regular expression pattern. Useful to track links to specific dead sites. The default pattern can be set by the -pattern option.
 
