@@ -15,5 +15,6 @@ func fileInfo(url string) string {
 	statusCode := response.StatusCode
 	contentType := headers["Content-Type"][0]
 	contentLength := response.ContentLength
-	return fmt.Sprintf("%s,%d,%s,%d\n", url, statusCode, contentType, contentLength)
+	finalURL := response.Request.URL.String()
+	return fmt.Sprintf("%s,%d,%s,%d,%s\n", url, statusCode, contentType, contentLength, finalURL)
 }

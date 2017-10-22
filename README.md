@@ -67,17 +67,20 @@ It will create a couple of files, one per check the script is doing:
 
 ## Information about other urls
 
-If you want to obtain information about non-html files, like for example images, it's better to use `-fileinfo`.
+If you want to obtain information about http responses, redirects or non-html files, like for example images, it's better to use `-fileinfo`.
 
 You must use this check in a separate command like:
-
 ```
 ./check-my-pages -urls=urls.csv -fileinfo -miliseconds=100
 ```
-
 because check-my-pages will stop after executing `-fileinfo`
 
-This check creates a file named `fileInfo.csv` with 4 fields: url, http status code, mime type and file size (adds -1 if the file size is unknown).
+This check creates a file named `fileInfo.csv` with 5 fields: 
+* initial url, 
+* http status code, 
+* mime type, 
+* file size *(adds -1 if the file size is unknown)*
+* final url
 
 ## Remove the report files
 
