@@ -16,14 +16,14 @@ check-my-pages is a scrapping script. It checks each url in a list and creates r
 
 EXAMPLES:
 
-./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects -linkpattern -cssjspattern -mediapattern
+./check-my-pages -urls=urls.csv -http -miliseconds=100
 
-./check-my-pages -urls=urls.csv -fileinfo -miliseconds=100
+./check-my-pages -urls=urls.csv -analytics -canonical -linkpattern -cssjspattern -mediapattern
 
 
 CHECKS:
 
--http : Gets the http response code. If it's 200 it should be OK.
+-http : Gets the http response code, mime-type, file size and final url. It must be used separately from the other checks.
 
 -analytics : Gets the first Google Analytics account.
 
@@ -35,8 +35,6 @@ CHECKS:
 
 -mediapattern : Gets urls from images, videos, audios, iframes and objects that match the regular expression pattern
 
--fileinfo : Speciall check more suitable for non-html pages (for example images). It needs to be used alone as the example above, without other checks.
-
 
 OPTIONS:
 
@@ -45,6 +43,10 @@ OPTIONS:
 -pattern='https?://(\w|-)+.greenpeace.org/espana/.+' : Changes the url search pattern to the regular expression. To be used with *pattern checks.
 
 -miliseconds=100 : Sets a delay of 100 miliseconds between requests.
+
+OTHER:
+
+-clear : Deletes all the files with the reports
 
 
 FILES WITH THE REPORTS:
