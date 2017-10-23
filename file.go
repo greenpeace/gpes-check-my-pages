@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-// Obtains statuscode, content-type and content lenght from a specific url
-func fileInfo(url string) string {
+// getHTTPinfoAsCsvline Obtains statuscode, content-type, content lenght and final URL from a specific http get request
+func getHTTPinfoAsCsvline(url string) string {
 	response, error := http.Get(url)
 	if error != nil {
 		return fmt.Sprintf("%s,%s,,\n", url, error.Error())

@@ -49,7 +49,7 @@ func main() {
 
 		var lineHTTP string
 		for _, v := range allUrls {
-			lineHTTP = fileInfo(v)
+			lineHTTP = getHTTPinfoAsCsvline(v)
 			if _, err := isHTTPfile.WriteString(lineHTTP); err != nil {
 				panic(err)
 			}
