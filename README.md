@@ -80,7 +80,7 @@ It will create a couple of files, one per check the script is doing:
 
 `-miliseconds=100` - Sets a delay of 100 miliseconds between requests (the default value)
 
-`-pattern='https?://(\w|-)+.greenpeace.org/espana/.+'` - Changes the search link pattern to the regular expression.
+`-pattern='https?://(\w|-)+.greenpeace.org/espana/.+'` - Changes the search url pattern to the regular expression.
 
 ## Remove the report files
 
