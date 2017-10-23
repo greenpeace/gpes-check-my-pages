@@ -11,6 +11,7 @@ func getHTTPinfoAsCsvline(url string) string {
 	if error != nil {
 		return fmt.Sprintf("%s,%s,,\n", url, error.Error())
 	}
+	defer response.Body.Close()
 	headers := response.Header
 	statusCode := response.StatusCode
 	contentType := headers["Content-Type"][0]
