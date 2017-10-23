@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"net/http"
 	"os"
 	"regexp"
 	"time"
@@ -16,10 +15,8 @@ func main() {
 	isHelp := flag.Bool("help", false, "Help")
 	urlsFileName := flag.String("urls", "urls.csv", "Name of the csv file with the urs in the first column")
 	isHTTP := flag.Bool("http", false, "Http response codes")
-	isRedirects := flag.Bool("redirects", false, "Redirects response codes")
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
-	isFileInfo := flag.Bool("fileinfo", false, "Specific calls for files")
 	isLinkpattern := flag.Bool("linkpattern", false, "Link Pattern")
 	isCSSJsPattern := flag.Bool("cssjspattern", false, "CSS and JS Pattern")
 	isMediaPattern := flag.Bool("mediapattern", false, "Image, object and iframe Pattern")
@@ -44,19 +41,22 @@ func main() {
 
 	if *isHTTP == true {
 
-		httpResponses, httpErr := os.OpenFile("httpResponses.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
-		if httpErr != nil {
-			panic(httpErr)
+		isHTTPfile, isHTTPErr := os.OpenFile("httpResponses.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if isHTTPErr != nil {
+			panic(isHTTPErr)
 		}
-		defer httpResponses.Close()
+		defer isHTTPfile.Close()
 
-		c.OnResponse(func(r *colly.Response) {
-			lineResponse := fmt.Sprintf("%s,%v\n", r.Request.URL.String(), r.StatusCode)
-			if _, err := httpResponses.WriteString(lineResponse); err != nil {
+		var lineHTTP string
+		for _, v := range allUrls {
+			lineHTTP = getHTTPinfoAsCsvline(v)
+			if _, err := isHTTPfile.WriteString(lineHTTP); err != nil {
 				panic(err)
 			}
+			time.Sleep(time.Millisecond * time.Duration(*waitMiliseconds))
+		}
 
-		})
+		os.Exit(0)
 	}
 
 	if *isAnalytics == true {
@@ -92,26 +92,6 @@ func main() {
 				panic(err)
 			}
 		})
-	}
-
-	if *isFileInfo == true {
-
-		fileInfofile, fileInfofileErr := os.OpenFile("fileInfo.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
-		if fileInfofileErr != nil {
-			panic(fileInfofileErr)
-		}
-		defer fileInfofile.Close()
-
-		var lineFileInfo string
-		for _, v := range allUrls {
-			lineFileInfo = fileInfo(v)
-			if _, err := fileInfofile.WriteString(lineFileInfo); err != nil {
-				panic(err)
-			}
-			time.Sleep(time.Millisecond * time.Duration(*waitMiliseconds))
-		}
-
-		os.Exit(0)
 	}
 
 	if *isLinkpattern == true {
@@ -234,39 +214,14 @@ func main() {
 
 	}
 
-	if *isRedirects == true {
-
-		redirects, redirectsErr := os.OpenFile("redirects.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
-		if redirectsErr != nil {
-			panic(redirects)
-		}
-		defer redirects.Close()
-
-		c.OnRequest(func(r *colly.Request) {
-			response, error := http.Get(r.URL.String())
-			if error != nil {
-				fmt.Printf("=> %v\n", error.Error())
-			} else {
-				finalURL := response.Request.URL.String()
-				lineCanonical := fmt.Sprintf("%s,%s\n", r.URL.String(), finalURL)
-				if _, err := redirects.WriteString(lineCanonical); err != nil {
-					panic(err)
-				}
-			}
-
-		})
-	}
-
 	if *isClear == true {
 
 		os.Remove("httpResponses.csv")
 		os.Remove("analytics.csv")
 		os.Remove("canonicals.csv")
-		os.Remove("redirects.csv")
 		os.Remove("linkpattern.csv")
 		os.Remove("cssjspattern.csv")
 		os.Remove("mediapattern.csv")
-		os.Remove("fileInfo.csv")
 		os.Exit(0)
 	}
 

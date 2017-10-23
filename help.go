@@ -16,28 +16,24 @@ check-my-pages is a scrapping script. It checks each url in a list and creates r
 
 EXAMPLES:
 
-./check-my-pages -urls=urls.csv -http -analytics -canonical -redirects -linkpattern -cssjspattern -mediapattern
+./check-my-pages -urls=urls.csv -http -miliseconds=100
 
-./check-my-pages -urls=urls.csv -fileinfo -miliseconds=100
+./check-my-pages -urls=urls.csv -analytics -canonical -linkpattern -cssjspattern -mediapattern
 
 
 CHECKS:
 
--http : Gets the http response code. If it's 200 it should be OK.
+-http : Gets the http response code, mime-type, file size and final url. It must be used separately from the other checks.
 
 -analytics : Gets the first Google Analytics account.
 
 -canonical : Gets the canonical URL for the url.
-
--redirects : Gets info about redirects and final URLs.
 
 -linkpattern : Gets links that match the regular expression pattern.
 
 -cssjspattern : Gets CSS and JS URLs that match the regular expression pattern.
 
 -mediapattern : Gets urls from images, videos, audios, iframes and objects that match the regular expression pattern
-
--fileinfo : Speciall check more suitable for non-html pages (for example images). It needs to be used alone as the example above, without other checks.
 
 
 OPTIONS:
@@ -48,6 +44,10 @@ OPTIONS:
 
 -miliseconds=100 : Sets a delay of 100 miliseconds between requests.
 
+OTHER:
+
+-clear : Deletes all the files with the reports
+
 
 FILES WITH THE REPORTS:
 
@@ -56,8 +56,6 @@ FILES WITH THE REPORTS:
 - analytics.csv : Reports google analytics tracking ID.
 
 - canonicals.csv : Reports the canonical url for every url
-
-- redirects.csv : Reports the requested URL and the final URL. This will be useful to test the redirects in the main site.
 
 - linkpattern.csv : Reports on links that include a regular expression pattern. Useful to track links to specific dead sites. The default pattern can be set by the -pattern option.
 
