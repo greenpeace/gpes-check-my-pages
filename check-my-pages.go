@@ -25,6 +25,22 @@ func main() {
 	isClear := flag.Bool("clear", false, "Remove files created by this script")
 	flag.Parse()
 
+	if *isHelp == true {
+		help()
+		os.Exit(0)
+	}
+
+	if *isClear == true {
+
+		os.Remove("httpResponses.csv")
+		os.Remove("analytics.csv")
+		os.Remove("canonicals.csv")
+		os.Remove("linkpattern.csv")
+		os.Remove("cssjspattern.csv")
+		os.Remove("mediapattern.csv")
+		os.Exit(0)
+	}
+
 	allUrlsCsv := readCsvFile(*urlsFileName)
 
 	allUrls := csvFirstColumnToSlice(allUrlsCsv)
@@ -33,11 +49,6 @@ func main() {
 
 	c := colly.NewCollector()
 	// c.AllowedDomains = []string{"localhost", "greenpeace.es", "archivo.greenpeace.es"}
-
-	if *isHelp == true {
-		help()
-		os.Exit(0)
-	}
 
 	if *isHTTP == true {
 
@@ -212,17 +223,6 @@ func main() {
 
 		})
 
-	}
-
-	if *isClear == true {
-
-		os.Remove("httpResponses.csv")
-		os.Remove("analytics.csv")
-		os.Remove("canonicals.csv")
-		os.Remove("linkpattern.csv")
-		os.Remove("cssjspattern.csv")
-		os.Remove("mediapattern.csv")
-		os.Exit(0)
 	}
 
 	// Open URLs file
