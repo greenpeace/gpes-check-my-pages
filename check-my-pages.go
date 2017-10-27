@@ -37,6 +37,7 @@ func main() {
 		os.Remove("httpResponses.csv")
 		os.Remove("analytics.csv")
 		os.Remove("canonicals.csv")
+		os.Remove("titles.csv")
 		os.Remove("linkpattern.csv")
 		os.Remove("cssjspattern.csv")
 		os.Remove("mediapattern.csv")
