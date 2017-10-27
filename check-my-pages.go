@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strconv"
 	"time"
 
 	"github.com/asciimoo/colly"
@@ -17,6 +18,7 @@ func main() {
 	isHTTP := flag.Bool("http", false, "Http response codes")
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
+	isTitle := flag.Bool("title", false, "Html title of html pages")
 	isLinkpattern := flag.Bool("linkpattern", false, "Link Pattern")
 	isCSSJsPattern := flag.Bool("cssjspattern", false, "CSS and JS Pattern")
 	isMediaPattern := flag.Bool("mediapattern", false, "Image, object and iframe Pattern")
@@ -83,6 +85,23 @@ func main() {
 			foundUA := searchInString(body, `UA-\d{5,8}-\d{1,2}`)
 			lineResponse := fmt.Sprintf("%s,%s\n", r.Request.URL.String(), foundUA)
 			if _, err := analytics.WriteString(lineResponse); err != nil {
+				panic(err)
+			}
+		})
+	}
+
+	if *isTitle == true {
+
+		titleFile, titleFileErr := os.OpenFile("titles.csv", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if titleFileErr != nil {
+			panic(titleFileErr)
+		}
+		defer titleFile.Close()
+
+		c.OnHTML("title", func(e *colly.HTMLElement) {
+			title := strconv.Quote(e.Text)
+			lineTitle := fmt.Sprintf("%s,%s\n", e.Request.URL.String(), title)
+			if _, err := titleFile.WriteString(lineTitle); err != nil {
 				panic(err)
 			}
 		})
