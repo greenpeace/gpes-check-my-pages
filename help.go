@@ -18,7 +18,7 @@ EXAMPLES:
 
 ./check-my-pages -urls=urls.csv -http -miliseconds=100
 
-./check-my-pages -urls=urls.csv -analytics -canonical -linkpattern -cssjspattern -mediapattern
+./check-my-pages -urls=urls.csv -analytics -canonical -title -linkpattern -cssjspattern -mediapattern
 
 
 CHECKS:
@@ -28,6 +28,8 @@ CHECKS:
 -analytics : Gets the first Google Analytics account.
 
 -canonical : Gets the canonical URL for the url.
+
+-title : Gets the title for the url, if it's an html page
 
 -linkpattern : Gets links that match the regular expression pattern.
 
@@ -56,6 +58,8 @@ FILES WITH THE REPORTS:
 - analytics.csv : Reports google analytics tracking ID.
 
 - canonicals.csv : Reports the canonical url for every url
+
+- titles.csv : Reports the title for every url
 
 - linkpattern.csv : Reports on links that include a regular expression pattern. Useful to track links to specific dead sites. The default pattern can be set by the -pattern option.
 
