@@ -1,30 +1,40 @@
 # check-my-pages
 
-**check-my-pages** is a scrapping script to test the Spanish web archive (with more than 10,000 pages). It checks each url in a list and creates report files about what was tested. Each file reports about a specific issue and includes the scanned url together with the result.
+**check-my-pages** is a scrapping script to test large sites. We are using it to test the Spanish soon-to-be archived site and redirects system, with more than 10,000 pages. It checks redirections, http responses, analytics, files hosted in soon-to-die servers, canonical urls and more.
+
+ It checks each url in a list and creates report files about what was tested. Each file reports about a specific issue and includes the scanned url together with the result.
 
 Please note that the script was written to check for problems detected when manually inspecting a small sample (about 1%) of the Spanish website. ~~This script was not built to be used as-it-is in other websites, you are supposed to modify it.~~
 
-This **command line** script complements other command line tools like ack, grep, rpl and others.
+This **command line** script complements other command line tools like ack, grep, rpl and others. Our own [ecounter](https://github.com/greenpeace/gpes-ecounter) and [ecompare](https://github.com/greenpeace/gpes-ecompare) are also used.
 
 ## Download and install
 
 ### Install the lastest version
 
-Go to the [releases page](https://github.com/greenpeace/check-my-pages/releases) and download the last version for your operating system: Windows, Mac and Linux 64bit.
+Go to the [releases page](https://github.com/greenpeace/gpes-check-my-pages/releases) and download the last version for your 64bit operating system: Windows, Mac and Linux.
 
 ### Install from source
 
-If you have the Go compiler installed you can download and install go with:
+If you have the [Go](https://golang.org/) compiler installed, you can download and install go with:
 
 ```
-go get github.com/greenpeace/check-my-pages
+go get github.com/greenpeace/gpes-check-my-pages
 
-go install github.com/greenpeace/check-my-pages
+go install github.com/greenpeace/gpes-check-my-pages
+```
+
+### Update from source
+
+```
+go get -u github.com/greenpeace/gpes-check-my-pages
+
+go install github.com/greenpeace/gpes-check-my-pages
 ```
 
 ### Get help
 
-If you downloaded and installed the latest version from the [releases page](https://github.com/greenpeace/check-my-pages/releases) do:
+If you downloaded and installed the latest version from the [releases page](https://github.com/greenpeace/gpes-check-my-pages/releases) do:
 
 ```
  ./check-my-pages --help
@@ -40,7 +50,7 @@ If you installed from source do:
 
 The urls file, by default `urls.csv` must have all the urls you want to check. You can use a text file with 1 url per line or a csv file with the urls on the first column and without headers.
 
-You can use [ecounter](https://github.com/greenpeace/ecounter) to create a urls file from a sitemap.xml file.
+You can use [ecounter](https://github.com/greenpeace/gpes-ecounter) to create a urls file from a sitemap.xml file.
 
 ## Http info about a list of urls
 
