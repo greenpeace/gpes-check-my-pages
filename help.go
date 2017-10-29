@@ -67,6 +67,13 @@ FILES WITH THE REPORTS:
 
 - mediapattern.csv : Reports media links. Images, videos, audios, iframes and objects. Also use -pattern to define the urls pattern.
 
-	
+CRAWL
+
+If you don't have a file with the urls you can try to obtain it by crawling the site:
+
+./check-my-pages -crawl -urls=crawledurls.csv  -start='https://www.fotografar.net/' -pattern='https://www.fotografar.net/.*'
+
+It will save, in crawledurls.csv, all the urls it can find from the start url and that match the pattern.
+
 	`)
 }

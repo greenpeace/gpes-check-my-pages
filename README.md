@@ -100,3 +100,15 @@ To remove the files created by **check-my-pages**:
 ```
 ./check-my-pages -clear 
 ```
+
+## Crawl URLS
+
+If you don't have a sitemap.xml or another file with the urls, you can crawl the site: 
+
+```
+./check-my-pages -crawl -urls=crawledurls.csv  -start='https://www.fotografar.net/' -pattern='https://www.fotografar.net/.*'
+```
+
+It will save, in crawledurls.csv, all the urls that match the regular expression pattern and that can be obtained by crawling from the start url. 
+
+You can make as many crawls as you want to the same crawledurls.csv file. If you get repeated urls, you can use [ecounter](https://github.com/greenpeace/gpes-ecounter) to obtain unique urls (from one or multiple concatenated files).
