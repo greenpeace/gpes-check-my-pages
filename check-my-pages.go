@@ -16,6 +16,8 @@ func main() {
 	isHelp := flag.Bool("help", false, "Help")
 	urlsFileName := flag.String("urls", "urls.csv", "Name of the csv file with the urs in the first column")
 	isHTTP := flag.Bool("http", false, "Http response codes")
+	isCrawl := flag.Bool("crawl", false, "Crawl from the start page within the pattern. Run without other checks.")
+	startURL := flag.String("start", ``, "Start url when crawling")
 	isAnalytics := flag.Bool("analytics", false, "Correct analytics tag in the html")
 	isCanonical := flag.Bool("canonical", false, "Canonical URLS in the ")
 	isTitle := flag.Bool("title", false, "Html title of html pages")
@@ -69,6 +71,35 @@ func main() {
 			}
 			time.Sleep(time.Millisecond * time.Duration(*waitMiliseconds))
 		}
+
+		os.Exit(0)
+	}
+
+	if *isCrawl == true {
+
+		fmt.Println("Start crawling from", *startURL, "and only add urls with the pattern:", *pattern)
+		crawlFile, crawlFileErr := os.OpenFile(*urlsFileName, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if crawlFileErr != nil {
+			panic(crawlFileErr)
+		}
+		defer crawlFile.Close()
+
+		cr := colly.NewCollector()
+
+		cr.URLFilters = []*regexp.Regexp{
+			regexp.MustCompile(*pattern), // For example: -pattern='https://www.fotografar.net/.*'
+		}
+
+		cr.OnHTML("a[href]", func(e *colly.HTMLElement) {
+			link := e.Attr("href")
+			cr.Visit(e.Request.AbsoluteURL(link))
+		})
+
+		cr.OnRequest(func(r *colly.Request) {
+			fmt.Println(r.URL.String())
+		})
+
+		cr.Visit(*startURL)
 
 		os.Exit(0)
 	}
