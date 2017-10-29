@@ -46,6 +46,38 @@ func main() {
 		os.Exit(0)
 	}
 
+	if *isCrawl == true {
+
+		fmt.Println("Start crawling from", *startURL, "and only add urls with the pattern:", *pattern)
+		fmt.Println("Save the urls in", *urlsFileName)
+		crawlFile, crawlFileErr := os.OpenFile(*urlsFileName, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+		if crawlFileErr != nil {
+			panic(crawlFileErr)
+		}
+		defer crawlFile.Close()
+
+		cr := colly.NewCollector()
+
+		cr.URLFilters = []*regexp.Regexp{
+			regexp.MustCompile(*pattern),
+		}
+
+		cr.OnHTML("a[href]", func(e *colly.HTMLElement) {
+			link := e.Attr("href")
+			cr.Visit(e.Request.AbsoluteURL(link))
+		})
+
+		cr.OnRequest(func(r *colly.Request) {
+			if _, err := crawlFile.WriteString(r.URL.String() + "\n"); err != nil {
+				panic(err)
+			}
+		})
+
+		cr.Visit(*startURL)
+
+		os.Exit(0)
+	}
+
 	allUrlsCsv := readCsvFile(*urlsFileName)
 
 	allUrls := csvFirstColumnToSlice(allUrlsCsv)
@@ -71,35 +103,6 @@ func main() {
 			}
 			time.Sleep(time.Millisecond * time.Duration(*waitMiliseconds))
 		}
-
-		os.Exit(0)
-	}
-
-	if *isCrawl == true {
-
-		fmt.Println("Start crawling from", *startURL, "and only add urls with the pattern:", *pattern)
-		crawlFile, crawlFileErr := os.OpenFile(*urlsFileName, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
-		if crawlFileErr != nil {
-			panic(crawlFileErr)
-		}
-		defer crawlFile.Close()
-
-		cr := colly.NewCollector()
-
-		cr.URLFilters = []*regexp.Regexp{
-			regexp.MustCompile(*pattern), // For example: -pattern='https://www.fotografar.net/.*'
-		}
-
-		cr.OnHTML("a[href]", func(e *colly.HTMLElement) {
-			link := e.Attr("href")
-			cr.Visit(e.Request.AbsoluteURL(link))
-		})
-
-		cr.OnRequest(func(r *colly.Request) {
-			fmt.Println(r.URL.String())
-		})
-
-		cr.Visit(*startURL)
 
 		os.Exit(0)
 	}
