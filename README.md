@@ -106,7 +106,7 @@ To remove the files created by **check-my-pages**:
 If you don't have a sitemap.xml or another file with the urls, you can crawl the site: 
 
 ```
-./check-my-pages -crawl -urls=crawledurls.csv  -start='https://www.fotografar.net/' -pattern='https://www.fotografar.net/.*'
+./check-my-pages -crawl -urls=crawledurls.csv  -start='https://www.fotografar.net/' -pattern='https://www.fotografar.net/.*' -miliseconds=100
 ```
 
 It will save, in crawledurls.csv, all the urls that match the regular expression pattern and that can be obtained by crawling from the start url. 

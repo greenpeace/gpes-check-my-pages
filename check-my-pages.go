@@ -71,6 +71,7 @@ func main() {
 			if _, err := crawlFile.WriteString(r.URL.String() + "\n"); err != nil {
 				panic(err)
 			}
+			time.Sleep(time.Millisecond * time.Duration(*waitMiliseconds))
 		})
 
 		cr.Visit(*startURL)
