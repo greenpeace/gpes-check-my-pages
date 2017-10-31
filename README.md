@@ -18,7 +18,7 @@ Go to the [releases page](https://github.com/greenpeace/gpes-check-my-pages/rele
 
 If you have the [Go](https://golang.org/) compiler installed, you can download and install go with:
 
-```
+```bash
 go get github.com/greenpeace/gpes-check-my-pages
 
 go install github.com/greenpeace/gpes-check-my-pages
@@ -26,7 +26,7 @@ go install github.com/greenpeace/gpes-check-my-pages
 
 ### Update from source
 
-```
+```bash
 go get -u github.com/greenpeace/gpes-check-my-pages
 
 go install github.com/greenpeace/gpes-check-my-pages
@@ -36,13 +36,13 @@ go install github.com/greenpeace/gpes-check-my-pages
 
 If you downloaded and installed the latest version from the [releases page](https://github.com/greenpeace/gpes-check-my-pages/releases) do:
 
-```
+```bash
  ./check-my-pages --help
 ```
 
 If you installed from source do:
 
-```
+```bash
  check-my-pages --help
 ```
 
@@ -57,29 +57,33 @@ You can use [ecounter](https://github.com/greenpeace/gpes-ecounter) to create a 
 If you want to obtain information about http status codes, mime-types, file sizes and redirect urls of any urls, you can use `-http`.
 
 You must use this check in a separate command like:
-```
+
+```bash
 ./check-my-pages -urls=urls.csv -http -miliseconds=100
 ```
+
 because check-my-pages will stop after executing `-http`
 
 This check creates a file named `httpResponses.csv` with 5 fields: 
+
 1. initial url
-2. http status code
-3. mime type
-4. file size *(adds -1 if the file size is unknown)*
-5. final url
+1. http status code
+1. mime type
+1. file size *(adds -1 if the file size is unknown)*
+1. final url
 
 ## Checking html urls
 
 To do all the checks in `urls.csv` (html urls) with all the checks use the command:
 
-```
+```bash
 ./check-my-pages -urls=urls.csv -analytics -canonical -title -linkpattern -cssjspattern -mediapattern
 ```
 
 This repository includes a few testing urls in the file `urls.csv`. Please replace them by your own.
 
 It will create a couple of files, one per check the script is doing:
+
 * `analytics.csv` - Reports **google analytics** tracking ID
 * `canonicals.csv` - Reports the **canonical url** for every url
 * `titles.csv` - Reports the **title** for every url
@@ -97,7 +101,7 @@ It will create a couple of files, one per check the script is doing:
 
 To remove the files created by **check-my-pages**:
 
-```
+```bash
 ./check-my-pages -clear 
 ```
 
@@ -105,7 +109,7 @@ To remove the files created by **check-my-pages**:
 
 If you don't have a sitemap.xml or another file with the urls, you can crawl the site: 
 
-```
+```bash
 ./check-my-pages -crawl -urls=crawledurls.csv  -start='https://www.fotografar.net/' -pattern='https://www.fotografar.net/.*' -miliseconds=100
 ```
 
