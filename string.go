@@ -1,6 +1,9 @@
 package main
 
-import "regexp"
+import (
+	"regexp"
+	"time"
+)
 
 // searchInString reads a string and returns all matches in the string.
 func searchInString(total string, expression string) string {
@@ -10,4 +13,10 @@ func searchInString(total string, expression string) string {
 	}
 	firstMatch := r.FindString(total)
 	return firstMatch
+}
+
+// nowDateTimeString Returns
+func nowDateTimeString() string {
+	t := time.Now()
+	return t.Format("2006-01-02-15h04m05")
 }

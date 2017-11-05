@@ -26,12 +26,27 @@ func main() {
 	isMediaPattern := flag.Bool("mediapattern", false, "Image, object and iframe Pattern")
 	pattern := flag.String("pattern", `https?://(\w|-)+.greenpeace.org/espana/.+`, "Regular expression to detect in the links")
 	waitMiliseconds := flag.Int("miliseconds", 100, "Miliseconds between requests")
+	isStash := flag.Bool("stash", false, "Rename files created by this script")
 	isClear := flag.Bool("clear", false, "Remove files created by this script")
 	flag.Parse()
 
 	if *isHelp == true {
 		help()
 		os.Exit(0)
+	}
+
+	if *isStash == true {
+
+		now := nowDateTimeString()
+		os.Rename("httpResponses.csv", "httpResponses-"+now+".csv")
+		os.Rename("analytics.csv", "analytics-"+now+".csv")
+		os.Rename("canonicals.csv", "canonicals-"+now+".csv")
+		os.Rename("titles.csv", "titles-"+now+".csv")
+		os.Rename("linkpattern.csv", "linkpattern-"+now+".csv")
+		os.Rename("cssjspattern.csv", "cssjspattern-"+now+".csv")
+		os.Rename("mediapattern.csv", "mediapattern-"+now+".csv")
+		os.Exit(0)
+
 	}
 
 	if *isClear == true {
