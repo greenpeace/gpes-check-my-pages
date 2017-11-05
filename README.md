@@ -102,8 +102,18 @@ It will create a couple of files, one per check the script is doing:
 To remove the files created by **check-my-pages**:
 
 ```bash
-./check-my-pages -clear 
+./check-my-pages -clear
 ```
+
+## Rename the report files
+
+Renames the files created by **check-my-pages** adding date and time to the name.
+
+```bash
+./check-my-pages -stash
+```
+
+By renaming the files you prevent the results from future reports being added to the end of each file.
 
 ## Crawl URLS
 
