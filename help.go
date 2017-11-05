@@ -50,6 +50,8 @@ OTHER:
 
 -clear : Deletes all the files with the reports
 
+-stash : Renames all the files with the reports to prevent overwiting them
+
 
 FILES WITH THE REPORTS:
 
