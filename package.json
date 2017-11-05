@@ -1,0 +1,7 @@
+{
+    "name": "check-my-pages",
+    "version": "1.2",
+    "dependencies": {
+        "colly": "asciimoo/colly"
+    }
+}
