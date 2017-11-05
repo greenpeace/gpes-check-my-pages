@@ -1,7 +1,0 @@
-{
-    "name": "check-my-pages",
-    "version": "1.3.0",
-    "dependencies": {
-        "colly": "git://github.com/asciimoo/colly.git#58388fa"
-    }
-}
