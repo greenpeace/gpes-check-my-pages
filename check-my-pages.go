@@ -94,6 +94,10 @@ func main() {
 		os.Exit(0)
 	}
 
+	if _, err := os.Stat(*urlsFileName); os.IsNotExist(err) {
+		fmt.Println("ERROR: The file/path", *urlsFileName, "does not exist here")
+		os.Exit(-1)
+	}
 	allUrlsCsv := readCsvFile(*urlsFileName)
 
 	allUrls := csvFirstColumnToSlice(allUrlsCsv)
