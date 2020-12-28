@@ -1,6 +1,6 @@
 # check-my-pages
 
-**check-my-pages** is a scrapping script to test large sites. We are using it to test the Spanish soon-to-be archived site and redirects system, with more than 10,000 pages. It checks redirections, http responses, analytics, files hosted in soon-to-die servers, canonical urls and more.
+**check-my-pages** is a scraping script to test large sites. We are using it to test the Spanish soon-to-be archived site and redirects system, with more than 10,000 pages. It checks redirections, http responses, analytics, files hosted in soon-to-die servers, canonical urls and more.
 
  It checks each url in a list and creates report files about what was tested. Each file reports about a specific issue and includes the scanned url together with the result.
 
