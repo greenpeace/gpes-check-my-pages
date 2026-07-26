@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/asciimoo/colly"
+	"github.com/gocolly/colly/v2"
 )
 
 func main() {

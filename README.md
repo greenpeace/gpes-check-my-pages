@@ -16,20 +16,26 @@ Go to the [releases page](https://github.com/greenpeace/gpes-check-my-pages/rele
 
 ### Install from source
 
-If you have the [Go](https://golang.org/) compiler installed, you can download and install go with:
+If you have the [Go](https://go.dev/) compiler installed, you can download and install it with:
 
 ```bash
-go get github.com/greenpeace/gpes-check-my-pages
+go install github.com/greenpeace/gpes-check-my-pages@latest
+```
 
-go install github.com/greenpeace/gpes-check-my-pages
+Or clone this repository and build it yourself:
+
+```bash
+git clone https://github.com/greenpeace/gpes-check-my-pages.git
+
+cd gpes-check-my-pages
+
+go build
 ```
 
 ### Update from source
 
 ```bash
-go get -u github.com/greenpeace/gpes-check-my-pages
-
-go install github.com/greenpeace/gpes-check-my-pages
+go install github.com/greenpeace/gpes-check-my-pages@latest
 ```
 
 ### Get help
