@@ -10,26 +10,43 @@ This **command line** script complements other command line tools like ack, grep
 
 ## Download and install
 
-### Install the lastest version
+### Install the latest version
 
 Go to the [releases page](https://github.com/greenpeace/gpes-check-my-pages/releases) and download the last version for your 64bit operating system: Windows, Mac and Linux.
 
 ### Install from source
 
-If you have the [Go](https://go.dev/) compiler installed, you can download and install it with:
+You need [Go](https://go.dev/) 1.26.5 or newer. Then you can download and install it with:
 
 ```bash
 go install github.com/greenpeace/gpes-check-my-pages@latest
 ```
 
-Or clone this repository and build it yourself:
+This installs a binary named `gpes-check-my-pages` in your Go bin directory.
+
+Or clone this repository and build the `check-my-pages` binary yourself:
 
 ```bash
 git clone https://github.com/greenpeace/gpes-check-my-pages.git
 
 cd gpes-check-my-pages
 
-go build
+go build -o check-my-pages
+```
+
+### Build for Windows, Mac and Linux
+
+Go can cross-compile for other operating systems without extra tools:
+
+```bash
+# Windows (64 bit)
+GOOS=windows GOARCH=amd64 go build -o check-my-pages.exe .
+
+# Linux (64 bit)
+GOOS=linux GOARCH=amd64 go build -o check-my-pages-linux .
+
+# Mac with Apple Silicon
+GOOS=darwin GOARCH=arm64 go build -o check-my-pages-mac .
 ```
 
 ### Update from source
@@ -40,16 +57,16 @@ go install github.com/greenpeace/gpes-check-my-pages@latest
 
 ### Get help
 
-If you downloaded and installed the latest version from the [releases page](https://github.com/greenpeace/gpes-check-my-pages/releases) do:
+If you downloaded the latest version from the [releases page](https://github.com/greenpeace/gpes-check-my-pages/releases) or built it with `go build` do:
 
 ```bash
  ./check-my-pages --help
 ```
 
-If you installed from source do:
+If you installed it with `go install` do:
 
 ```bash
- check-my-pages --help
+ gpes-check-my-pages --help
 ```
 
 ## File with list of urls
@@ -94,7 +111,7 @@ It will create a couple of files, one per check the script is doing:
 * `canonicals.csv` - Reports the **canonical url** for every url
 * `titles.csv` - Reports the **title** for every url
 * `linkpattern.csv` - Reports on links that include a regular expression pattern. Useful to track **links** to specific **dead sites**. The default pattern can be set by the `-pattern` option.
-* `cssjspattern.csv` - Reports **css and js** urls that include a regular expression pattern. To detect dead css and js urls in large sites. The pattern can also be defined with the option `-pattern` (described bellow)
+* `cssjspattern.csv` - Reports **css and js** urls that include a regular expression pattern. To detect dead css and js urls in large sites. The pattern can also be defined with the option `-pattern` (described below)
 * `mediapattern.csv` - Reports **media** links. Images, videos, audios, iframes and objects. Also use `-pattern` to define the urls pattern.
 
 ## Optional command line configurations

@@ -11,7 +11,7 @@ func help() {
 CHECK-MY-PAGES HELP
 -------------------
 
-check-my-pages is a scrapping script. It checks each url in a list and creates report files about what was tested. Each file reports about a specific issue and includes the scanned url together with the result.
+check-my-pages is a scraping script. It checks each url in a list and creates report files about what was tested. Each file reports about a specific issue and includes the scanned url together with the result.
 
 
 EXAMPLES:
